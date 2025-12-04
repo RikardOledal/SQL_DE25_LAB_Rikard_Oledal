@@ -89,25 +89,6 @@ from film limit 5;
 │ 5 rows                                                                                                                                          13 columns (10 shown) │       
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 from film_actor limit 5;
-from film_category limit 5;
-from film_list limit 5;
-from film_text limit 5;
-from inventory limit 5;
-from language limit 5;
-from payment limit 5;
-from rental limit 5;
-from sales_by_film_category limit 5;
-from sales_by_store limit 5;
-from staff limit 5;
-from staff_list limit 5;
-from store limit 5;
-
-
-
-
-
-
-
 ┌──────────┬─────────┬─────────────────────┐
 │ actor_id │ film_id │     last_update     │
 │  int64   │  int64  │      timestamp      │
@@ -118,6 +99,7 @@ from store limit 5;
 │        1 │     106 │ 2021-03-06 15:52:45 │
 │        1 │     140 │ 2021-03-06 15:52:45 │
 └──────────┴─────────┴─────────────────────┘
+from film_category limit 5;
 ┌─────────┬─────────────┬─────────────────────┐
 │ film_id │ category_id │     last_update     │
 │  int64  │    int64    │      timestamp      │
@@ -128,6 +110,7 @@ from store limit 5;
 │       4 │          11 │ 2021-03-06 15:53:28 │
 │       5 │           8 │ 2021-03-06 15:53:28 │
 └─────────┴─────────────┴─────────────────────┘
+from film_list limit 5;
 ┌───────┬──────────────────────┬──────────────────────────────────────────────────────────────────────────────────┬─────────────┬────────┬────────┬─────────┬──────────────────┐
 │  FID  │        title         │                                   description                                    │  category   │ price  │ length │ rating  │      actors      │
 │ int64 │       varchar        │                                     varchar                                      │   varchar   │ double │ int64  │ varchar │     varchar      │
@@ -138,12 +121,14 @@ from store limit 5;
 │   106 │ BULWORTH COMMANDME.  │ A Amazing Display of a Mad Cow And a Pioneer who must Redeem a Sumo Wrestler i.  │ Games       │   2.99 │     61 │ G       │ PENELOPE GUINESS │
 │   140 │ CHEAPER CLYDE        │ A Emotional Character Study of a Pioneer And a Girl who must Discover a Dog in.  │ Sci-Fi      │   0.99 │     87 │ G       │ PENELOPE GUINESS │
 └───────┴──────────────────────┴──────────────────────────────────────────────────────────────────────────────────┴─────────────┴────────┴────────┴─────────┴──────────────────┘
+from film_text limit 5;
 ┌─────────┬─────────┬─────────────┐
 │ film_id │  title  │ description │
 │  int64  │ varchar │   varchar   │
 ├─────────┴─────────┴─────────────┤
 │             0 rows              │
 └─────────────────────────────────┘
+from inventory limit 5;
 ┌──────────────┬─────────┬──────────┬─────────────────────┐
 │ inventory_id │ film_id │ store_id │     last_update     │
 │    int64     │  int64  │  int64   │      timestamp      │
@@ -154,6 +139,7 @@ from store limit 5;
 │            4 │       1 │        1 │ 2021-03-06 15:52:08 │
 │            5 │       1 │        2 │ 2021-03-06 15:52:08 │
 └──────────────┴─────────┴──────────┴─────────────────────┘
+from language limit 5;
 ┌─────────────┬──────────┬─────────────────────┐
 │ language_id │   name   │     last_update     │
 │    int64    │ varchar  │      timestamp      │
@@ -164,6 +150,7 @@ from store limit 5;
 │           4 │ Mandarin │ 2021-03-06 15:51:48 │
 │           5 │ French   │ 2021-03-06 15:51:48 │
 └─────────────┴──────────┴─────────────────────┘
+from payment limit 5;
 ┌────────────┬─────────────┬──────────┬───────────┬────────┬─────────────────────┬─────────────────────┐
 │ payment_id │ customer_id │ staff_id │ rental_id │ amount │    payment_date     │     last_update     │
 │   int64    │    int64    │  int64   │   int64   │ double │      timestamp      │      timestamp      │
@@ -174,6 +161,7 @@ from store limit 5;
 │          4 │           1 │        2 │      1422 │   0.99 │ 2005-06-15 18:02:53 │ 2021-03-06 15:55:57 │
 │          5 │           1 │        2 │      1476 │   9.99 │ 2005-06-15 21:08:46 │ 2021-03-06 15:55:57 │
 └────────────┴─────────────┴──────────┴───────────┴────────┴─────────────────────┴─────────────────────┘
+from rental limit 5;
 ┌───────────┬─────────────────────┬──────────────┬─────────────┬─────────────────────┬──────────┬─────────────────────┐
 │ rental_id │     rental_date     │ inventory_id │ customer_id │     return_date     │ staff_id │     last_update     │
 │   int64   │      timestamp      │    int64     │    int64    │      timestamp      │  int64   │      timestamp      │
@@ -184,6 +172,7 @@ from store limit 5;
 │         4 │ 2005-05-24 23:04:41 │         2452 │         333 │ 2005-06-03 01:43:41 │        2 │ 2021-03-06 15:53:41 │
 │         5 │ 2005-05-24 23:05:21 │         2079 │         222 │ 2005-06-02 04:33:21 │        1 │ 2021-03-06 15:53:41 │
 └───────────┴─────────────────────┴──────────────┴─────────────┴─────────────────────┴──────────┴─────────────────────┘
+from sales_by_film_category limit 5;
 ┌──────────┬────────────────────┐
 │ category │    total_sales     │
 │ varchar  │       double       │
@@ -194,6 +183,7 @@ from store limit 5;
 │ Foreign  │  4270.669999999888 │
 │ Family   │ 4226.0699999998815 │
 └──────────┴────────────────────┘
+from sales_by_store limit 5;
 ┌──────────┬─────────────────────┬──────────────┬────────────────────┐
 │ store_id │        store        │   manager    │    total_sales     │
 │  int64   │       varchar       │   varchar    │       double       │
@@ -201,6 +191,7 @@ from store limit 5;
 │        1 │ Lethbridge,Canada   │ Mike Hillyer │ 33679.790000004956 │
 │        2 │ Woodridge,Australia │ Jon Stephens │ 33726.770000005024 │
 └──────────┴─────────────────────┴──────────────┴────────────────────┘
+from staff limit 5;
 ┌──────────┬────────────┬───────────┬────────────┬─────────┬──────────────────────┬──────────┬────────┬──────────┬───────────────────────────────────────┬─────────────────────┐
 │ staff_id │ first_name │ last_name │ address_id │ picture │        email         │ store_id │ active │ username │               password                │     last_update     │
 │  int64   │  varchar   │  varchar  │   int64    │  blob   │       varchar        │  int64   │ int64  │ varchar  │                varchar                │      timestamp      │
@@ -208,7 +199,7 @@ from store limit 5;
 │        1 │ Mike       │ Hillyer   │          3 │ NULL    │ Mike.Hillyer@sakil.  │        1 │      1 │ Mike     │ 8cb2237d0679ca88db6464eac60da963455.  │ 2021-03-06 15:52:00 │
 │        2 │ Jon        │ Stephens  │          4 │ NULL    │ Jon.Stephens@sakil.  │        2 │      1 │ Jon      │ 8cb2237d0679ca88db6464eac60da963455.  │ 2021-03-06 15:52:00 │
 └──────────┴────────────┴───────────┴────────────┴─────────┴──────────────────────┴──────────┴────────┴──────────┴───────────────────────────────────────┴─────────────────────┘
-
+from staff_list limit 5;
 ┌───────┬──────────────┬──────────────────────┬──────────┬─────────┬────────────┬───────────┬───────┐
 │  ID   │     name     │       address        │ zip_code │  phone  │    city    │  country  │  SID  │
 │ int64 │   varchar    │       varchar        │ varchar  │ varchar │  varchar   │  varchar  │ int64 │
@@ -216,6 +207,7 @@ from store limit 5;
 │     1 │ Mike Hillyer │ 23 Workhaven Lane    │ NULL     │         │ Lethbridge │ Canada    │     1 │
 │     2 │ Jon Stephens │ 1411 Lillydale Drive │ NULL     │         │ Woodridge  │ Australia │     2 │
 └───────┴──────────────┴──────────────────────┴──────────┴─────────┴────────────┴───────────┴───────┘
+from store limit 5;
 ┌──────────┬──────────────────┬────────────┬─────────────────────┐
 │ store_id │ manager_staff_id │ address_id │     last_update     │
 │  int64   │      int64       │   int64    │      timestamp      │
@@ -223,3 +215,10 @@ from store limit 5;
 │        1 │                1 │          1 │ 2021-03-06 15:52:00 │
 │        2 │                2 │          2 │ 2021-03-06 15:52:00 │
 └──────────┴──────────────────┴────────────┴─────────────────────┘
+
+
+
+
+
+
+
