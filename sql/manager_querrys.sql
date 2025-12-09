@@ -59,3 +59,33 @@ ORDER BY
     Nr_movies DESC
 LIMIT
     10;
+
+-- Most spent
+SELECT
+    c.customer_id,
+    c.first_name || ' ' || c.last_name AS customer,
+    sum(p.amount) AS total_spend
+FROM
+    staging.payment p
+    LEFT JOIN staging.customer c ON c.customer_id = p.customer_id
+    LEFT JOIN staging.store s ON s.store_id = c.store_id
+GROUP BY
+  customer, c.customer_id
+ORDER BY
+  total_spend DESC;
+
+-- Most money per category
+SELECT
+    c.name AS category,
+    SUM(p.amount) total_sum,
+FROM
+    staging.payment p
+    LEFT JOIN staging.rental r ON p.rental_id = r.rental_id
+    INNER JOIN staging.inventory i ON i.inventory_id = r.inventory_id
+    INNER JOIN staging.film f ON f.film_id = i.film_id
+    INNER JOIN staging.film_category fc ON fc.film_id = f.film_id
+    INNER JOIN staging.category c ON c.category_id = fc.category_id
+GROUP BY
+    category
+ORDER BY
+    total_sum DESC;
