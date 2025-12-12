@@ -89,3 +89,39 @@ GROUP BY
     category
 ORDER BY
     total_sum DESC;
+
+-- Best rev/film grouped by category
+SELECT
+  c.name AS category,
+  COUNT(DISTINCT i.inventory_id) AS nr_film,
+  COUNT(i.inventory_id) AS nr_rental,
+  SUM(p.amount) AS Rev,
+  ROUND(SUM(p.amount)/COUNT(DISTINCT i.inventory_id),2) AS Rev_Film
+FROM staging.film f
+LEFT JOIN staging.film_category fc ON fc.film_id = f.film_id
+LEFT JOIN staging.category c ON c.category_id = fc.category_id
+LEFT JOIN staging.language l ON l.language_id = f.language_id
+RIGHT JOIN staging.inventory i ON i.film_id = f.film_id
+RIGHT JOIN staging.rental r ON r.inventory_id = i.inventory_id
+RIGHT JOIN staging.payment p ON p.rental_id = r.rental_id
+WHERE category IS NOT NULL
+GROUP BY category
+ORDER BY Rev_Film DESC;
+
+-- Most popular Actor in the Comedy category
+SELECT
+  c.name AS category,
+  f.film_id AS film,
+  a.first_name || ' ' || a.last_name AS Actor,
+  f.title
+FROM staging.film f
+LEFT JOIN staging.film_category fc ON fc.film_id = f.film_id
+LEFT JOIN staging.category c ON c.category_id = fc.category_id
+LEFT JOIN staging.language l ON l.language_id = f.language_id
+LEFT JOIN staging.film_actor fa ON fa.film_id = f.film_id
+LEFT JOIN staging.actor a ON a.actor_id = fa.actor_id
+WHERE film = 508
+ORDER BY Actor;
+
+
+
