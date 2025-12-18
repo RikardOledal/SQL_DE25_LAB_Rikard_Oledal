@@ -2,8 +2,10 @@
 title: Film
 ---
 
-<Details title='Wordsearch'>
-  With this wordsearch you can do searches by your self and se the titles. You can also do partly search by using %
+This page is made to be able to find information about films. You can see statistics about film lengths and there is also a filmsearch where you can search for words in filmtitles.
+
+<Details title='Filmsearch'>
+  With this filmsearch you can do searches by your self and se the titles. You can also do wildcard search by using %
 </Details>
 
 <TextInput
@@ -29,14 +31,14 @@ Searchword: {inputs.ts_textin}
 
 <DataTable data={ts_title_search}/>
 
-## Witch films exeeds 180 min?
+# Film lenght
 
-<Details title='Slider'>
+<Details title='Film lenght'>
   With this slider you can choose the length yourself.
 </Details>
 
 <Slider
-    title="Film length exceeds"
+    title="Exceeds"
     name=fle_slider
     defaultValue=180
     min=50
@@ -52,7 +54,9 @@ Searchword: {inputs.ts_textin}
   WHERE length > ${inputs.fle_slider}
 ```
 
-<DataTable data={fle_film_length_exceeds}/>
+<DataTable
+    title="Film length exceeds {inputs.fle_slider}"
+    data={fle_film_length_exceeds}/>
 
 ```sql fls_categories
   SELECT DISTINCT
@@ -77,4 +81,8 @@ Searchword: {inputs.ts_textin}
   WHERE category LIKE '${inputs.category.value}';
 ```
 
-<DataTable data={fls_film_length_stat}/>
+<DataTable
+    title={inputs.category.value === '%' 
+        ? "Film length statistics on all categories" 
+        : `Film length statistics on ${inputs.category.value}`}
+    data={fls_film_length_stat}/>

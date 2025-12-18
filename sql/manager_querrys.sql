@@ -76,18 +76,18 @@ LIMIT
 
 -- Best rev/film grouped by category
 SELECT
-    i.category,
-    COUNT(DISTINCT i.inventory_id) AS nr_film,
-    COUNT(i.inventory_id) AS rental_film,
-    SUM(rp.amount) AS revenue,
-    ROUND(SUM(rp.amount) / COUNT(DISTINCT i.inventory_id),2) AS Rev_Film
+    category,
+    COUNT(DISTINCT inventory_id) AS nr_film,
+    COUNT(inventory_id) AS rental_film,
+    SUM(amount) AS revenue,
+    ROUND(SUM(amount) / COUNT(DISTINCT inventory_id),2) AS Rev_Film
 FROM
-    refined.inventory i
-    LEFT JOIN refined.rental_pay rp ON rp.inventory_id = i.inventory_id
+    refined.rental_pay
 GROUP BY
-    i.category
+    category
 ORDER BY
-    Rev_Film DESC;
+    Rev_Film DESC
+LIMIT 10;
 
 -- Most popular Actor in the Comedy category
 SELECT

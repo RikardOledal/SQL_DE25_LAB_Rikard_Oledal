@@ -2,6 +2,8 @@
 title: Customers
 ---
 
+This page is made to see which customers have spent the most money. This is so that we can email them special offers.
+
 ```sql tcp_stores
   SELECT
       store_id,
@@ -46,6 +48,7 @@ title: Customers
 
 <BarChart 
     data={tcp_top_customer_pay}
+    title="Top customers"
     x=customer_name
     y=spent
     swapXY=true
