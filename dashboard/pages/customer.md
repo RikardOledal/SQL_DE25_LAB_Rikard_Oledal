@@ -5,15 +5,15 @@ title: Customers
 ```sql tcp_stores
   SELECT
       store_id,
-      CONCAT('Store ',store_id::INT) AS store_label
-  FROM sakila.store_list
+      store_name
+  FROM sakila.store
 ```
 <div style="display: flex; gap: 20px;">
   <Dropdown
     data={tcp_stores}
     name=stores
     value=store_id
-    label=store_label
+    label=store_name
     defaultValue={undefined}>
       <DropdownOption value={null} valueLabel="All Stores"/>
   </Dropdown>
@@ -29,14 +29,14 @@ title: Customers
 
 ```sql tcp_top_customer_pay
   SELECT
-    customer,
+    customer_name,
     email,
     ROUND(SUM(amount),0) AS spent
-  FROM sakila.customerspay
+  FROM sakila.rental_pay_email
   WHERE
     (${inputs.stores.value} IS null OR store_id = ${inputs.stores.value})
   GROUP BY
-    customer,
+    customer_name,
     email
   ORDER BY
     spent DESC
@@ -46,7 +46,7 @@ title: Customers
 
 <BarChart 
     data={tcp_top_customer_pay}
-    x=customer
+    x=customer_name
     y=spent
     swapXY=true
     yFmt=usd0

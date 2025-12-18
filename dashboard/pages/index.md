@@ -13,16 +13,21 @@ Hej
     <DropdownOption valueLabel="All" value={20} />
 </Dropdown>
 
+
 ```sql rbc_rev_by_cat
   SELECT
     category,
-    total_sum
-  FROM sakila.film_rev_by_cat
+    SUM(amount) AS total_sum
+  FROM sakila.rental_pay
+  GROUP BY
+    category
   ORDER BY
     total_sum DESC
   LIMIT
     ${inputs.TopCategorys.value}
+
 ```
+
 
 <BarChart 
     data={rbc_rev_by_cat}

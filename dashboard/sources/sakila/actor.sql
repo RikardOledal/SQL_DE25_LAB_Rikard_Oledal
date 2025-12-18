@@ -1,4 +1,4 @@
 SELECT
     *
 FROM
-    refined.film;
+    refined.actor;

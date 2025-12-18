@@ -20,7 +20,7 @@ Searchword: {inputs.ts_textin}
     rating,
     length,
     description
-  FROM sakila.film_list
+  FROM sakila.film
   WHERE
     title LIKE UPPER('% '||'${inputs.ts_textin}') OR
     title LIKE UPPER('${inputs.ts_textin}'||' %') OR
@@ -30,12 +30,6 @@ Searchword: {inputs.ts_textin}
 <DataTable data={ts_title_search}/>
 
 ## Witch films exeeds 180 min?
-```sql fle_max_min
-  SELECT
-    MAX(length) AS max,
-    MIN(length) AS min
-  FROM sakila.film_list
-```
 
 <Details title='Slider'>
   With this slider you can choose the length yourself.
@@ -45,8 +39,8 @@ Searchword: {inputs.ts_textin}
     title="Film length exceeds"
     name=fle_slider
     defaultValue=180
-    min={fle_max_min[0].min}
-    max={fle_max_min[0].max}
+    min=50
+    max=180
     showMaxMin=true
 />
 
@@ -63,7 +57,7 @@ Searchword: {inputs.ts_textin}
 ```sql fls_categories
   SELECT DISTINCT
       category
-  from sakila.films_with_category
+  from sakila.film
 ```
 <Dropdown
   data={fls_categories}
@@ -79,7 +73,7 @@ Searchword: {inputs.ts_textin}
     ROUND(AVG(length),0) AS Average,
     ROUND(MEDIAN(length),0) AS Median,
     MAX(length) AS Longest
-  FROM sakila.films_with_category
+  FROM sakila.film
   WHERE category LIKE '${inputs.category.value}';
 ```
 
