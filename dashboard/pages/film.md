@@ -48,7 +48,7 @@ Searchword: {inputs.ts_textin}
   SELECT
     title,
     length
-  from sakila.film_list
+  from sakila.film
   WHERE length > ${inputs.fle_slider}
 ```
 
