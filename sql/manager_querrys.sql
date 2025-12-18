@@ -1,10 +1,9 @@
 -- Movies lenght more than 180 min
-
 SELECT
     title,
     length
 FROM
-    film
+    refined.film
 WHERE
     length > 180;
 
@@ -16,7 +15,7 @@ SELECT
     length,
     description
 FROM
-    film
+    refined.film
 WHERE
     title LIKE '% LOVE' OR
     title LIKE 'LOVE %' OR
@@ -26,19 +25,19 @@ WHERE
 
 SELECT
     MIN(length) AS Shortest_min,
-    round(AVG(length),0) AS Average_min,
-    round(MEDIAN(length),0) AS Median_min,
+    round(AVG(length), 0) AS Average_min,
+    round(MEDIAN (length), 0) AS Median_min,
     MAX(length) AS Longest_min
 FROM
-    film;
+    refined.film;
 
 -- Rate per day
 
 SELECT
     title,
-    ROUND((rental_rate / rental_duration),2) AS Rent_per_day
+    ROUND((rental_rate / rental_duration), 2) AS Rent_per_day
 FROM
-    film
+    refined.film
 ORDER BY
     Rent_per_day DESC,
     title ASC
@@ -46,82 +45,106 @@ LIMIT
     10;
 
 -- Actor in most movies
-
 SELECT
-    a.first_name || ' ' || a.last_name AS Actor,
-    COUNT(*) AS Nr_movies
+    actor_name,
+    COUNT(*) AS Nr_films
 FROM
-    film_actor fa
-LEFT JOIN actor a ON a.actor_id = fa.actor_id
+    refined.actor
 GROUP BY
-    Actor
+    actor_name
 ORDER BY
-    Nr_movies DESC
+    Nr_films DESC
 LIMIT
     10;
 
 -- Most spent
 SELECT
-    c.customer_id,
-    c.first_name || ' ' || c.last_name AS customer,
-    sum(p.amount) AS total_spend
+    customer_id,
+    customer_name,
+    SUM(amount) AS total_spend
 FROM
-    staging.payment p
-    LEFT JOIN staging.customer c ON c.customer_id = p.customer_id
-    LEFT JOIN staging.store s ON s.store_id = c.store_id
+    refined.rental_pay
 GROUP BY
-  customer, c.customer_id
+    customer_name,
+    customer_id
 ORDER BY
-  total_spend DESC;
+    total_spend DESC
+LIMIT
+    5;
+
+
+
+-- Best rev/film grouped by category
+SELECT
+    i.category,
+    COUNT(DISTINCT i.inventory_id) AS nr_film,
+    COUNT(i.inventory_id) AS rental_film,
+    SUM(rp.amount) AS revenue,
+    ROUND(SUM(rp.amount) / COUNT(DISTINCT i.inventory_id),2) AS Rev_Film
+FROM
+    refined.inventory i
+    LEFT JOIN refined.rental_pay rp ON rp.inventory_id = i.inventory_id
+GROUP BY
+    i.category
+ORDER BY
+    Rev_Film DESC;
+
+-- Most popular Actor in the Comedy category
+SELECT
+    category,
+    actor_name,
+    COUNT(actor_id) AS nr_films
+FROM
+    refined.actor
+WHERE
+    category = 'Comedy'
+GROUP BY
+    actor_name,
+    category
+ORDER BY
+    nr_films DESC,
+    actor_name ASC
+LIMIT
+    5;
+
+-- Least revenue per film
+SELECT
+    title AS film,
+    COUNT(DISTINCT inventory_id) AS nr_films,
+    COUNT(rental_id) AS nr_rental,
+    SUM(amount) AS revenue
+FROM
+    refined.rental_pay
+GROUP BY
+    film
+ORDER BY
+    revenue ASC,
+    nr_rental ASC
+LIMIT
+    10;
+
+-- Most Revenue per customer
+SELECT
+    customer_id,
+    customer_name,
+    SUM(amount) AS total_spend
+FROM
+    refined.rental_pay
+GROUP BY
+    customer_name,
+    customer_id
+ORDER BY
+    total_spend DESC
+LIMIT
+    5;
 
 -- Most money per category
 SELECT
-    c.name AS category,
-    SUM(p.amount) total_sum,
+    category,
+    SUM(amount) total_sum,
 FROM
-    staging.payment p
-    LEFT JOIN staging.rental r ON p.rental_id = r.rental_id
-    INNER JOIN staging.inventory i ON i.inventory_id = r.inventory_id
-    INNER JOIN staging.film f ON f.film_id = i.film_id
-    INNER JOIN staging.film_category fc ON fc.film_id = f.film_id
-    INNER JOIN staging.category c ON c.category_id = fc.category_id
+    refined.rental_pay
 GROUP BY
     category
 ORDER BY
     total_sum DESC;
-
--- Best rev/film grouped by category
-SELECT
-  c.name AS category,
-  COUNT(DISTINCT i.inventory_id) AS nr_film,
-  COUNT(i.inventory_id) AS nr_rental,
-  SUM(p.amount) AS Rev,
-  ROUND(SUM(p.amount)/COUNT(DISTINCT i.inventory_id),2) AS Rev_Film
-FROM staging.film f
-LEFT JOIN staging.film_category fc ON fc.film_id = f.film_id
-LEFT JOIN staging.category c ON c.category_id = fc.category_id
-LEFT JOIN staging.language l ON l.language_id = f.language_id
-RIGHT JOIN staging.inventory i ON i.film_id = f.film_id
-RIGHT JOIN staging.rental r ON r.inventory_id = i.inventory_id
-RIGHT JOIN staging.payment p ON p.rental_id = r.rental_id
-WHERE category IS NOT NULL
-GROUP BY category
-ORDER BY Rev_Film DESC;
-
--- Most popular Actor in the Comedy category
-SELECT
-  c.name AS category,
-  f.film_id AS film,
-  a.first_name || ' ' || a.last_name AS Actor,
-  f.title
-FROM staging.film f
-LEFT JOIN staging.film_category fc ON fc.film_id = f.film_id
-LEFT JOIN staging.category c ON c.category_id = fc.category_id
-LEFT JOIN staging.language l ON l.language_id = f.language_id
-LEFT JOIN staging.film_actor fa ON fa.film_id = f.film_id
-LEFT JOIN staging.actor a ON a.actor_id = fa.actor_id
-WHERE film = 508
-ORDER BY Actor;
-
-
-

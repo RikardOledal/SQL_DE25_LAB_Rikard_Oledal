@@ -218,7 +218,25 @@ from store limit 5;
 
 
 
-
-
-
+SELECT
+    c.name AS category,
+    a.first_name || ' ' || a.last_name AS actor,
+    COUNT(a.actor_id) AS actor_id
+FROM
+    film f
+    LEFT JOIN film_category fc ON fc.film_id = f.film_id
+    LEFT JOIN category c ON c.category_id = fc.category_id
+    LEFT JOIN language l ON l.language_id = f.language_id
+    LEFT JOIN film_actor fa ON fa.film_id = f.film_id
+    LEFT JOIN actor a ON a.actor_id = fa.actor_id
+WHERE
+    category = 'Comedy'
+GROUP BY
+    actor,
+    category
+ORDER BY
+    actor_id DESC,
+    actor ASC
+LIMIT
+    5;
 
