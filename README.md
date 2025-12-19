@@ -33,7 +33,7 @@ I would answer questions from The Manager and insert these into a Manager report
 
 3. Run DLT
     ```bash
-    uv run DLT_Sakila.py
+    python DLT_Sakila.py
     ```
 
     With uv:
