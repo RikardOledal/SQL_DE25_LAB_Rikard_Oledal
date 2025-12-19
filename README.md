@@ -14,23 +14,28 @@ I would answer questions from The Manager and insert these into a Manager report
 </a>
 
 
-## How to run
-### Installation
+## Installation
 1. Clone the repo
+    ```bash
+    git clone https://github.com/RikardOledal/SQL_DE25_LAB_Rikard_Oledal.git
 2. Install dependencies:
+-   With pip:
     ```bash
     pip install -r requirements.txt
 
-   eller
-
+-   With uv:
     ```bash
     uv sync
 
 3. Run DLT
     ```bash
     uv run DLT_Sakila.py
-    
 
+-   With uv:
+    ```bash
+    uv run DLT_Sakila.py
+
+    
 ## Sakila DB
 Sakila is a database with data about films, how many of each film there are (inventory), how much these have been rented and how much has been paid for this. There is also information about customers who rent and staff who work there.
 
