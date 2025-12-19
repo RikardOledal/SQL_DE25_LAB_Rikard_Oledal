@@ -15,7 +15,6 @@ Sakila is a database with data about films, how many of each film there are (inv
 
 ![ERD-Chart](./img/Sakila_staging.png)
 
-<img = src = 
 
 ## Sakila refined
 I discovered that there would be many joins in each query if I were to use the structure that was in schema staging, so I created a refined schema with these tables.
@@ -29,15 +28,11 @@ After this, DLT will copy the database to evidence. This allows you to add data 
 ![Pipeline](./img/Pipeline.png)
 
 ## Evidence
-Comparison operators first compare Area and then Perimeter if the Areas are equal.
+I used the data from the manager report to design the dashboard in Evidence. But in Evidence I made the objects more selectable. For example, I didn't just bring up all the titles with LOVE in them, I made a movie search where you could search for any word you wanted.
 
-## Shape2dPlotter
-Shape2dPlotter takes in shape classes and plots them in a coordinate system. In order for the area to adapt to the size and location of the shapes, it calculates where the edge boundaries go. I also wanted both the x and y scales to be the same size and go to an even 10.
-
-## Unittesting
-207 unit tests that test each form and check for Error and whether you get correct answers.
-
-## Manual testing
-I geometry.ipynb I did some manualtest.
+## Help
+I have coded everything myself, but I have a study group with Anja Scherwall and Felix Kjellberg. I have discussed a lot with them when needed. We have also helped each other with tips and logic.
+I used ChatGPT and Google Gemini in troubleshooting when I didn't see the error myself. When I made the dashboard in Evidence, I looked a lot at [Evidence Docs][2].
 
 [1]: https://www.kaggle.com/datasets/atanaskanev/sqlite-sakila-sample-database
+[2]: https://docs.evidence.dev/
