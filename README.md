@@ -7,7 +7,7 @@ I would answer questions from The Manager and insert these into a Manager report
 ![Lab_instructions](./img/Lab_SQL.pdf)
 
 ## Video
-[![video](<img src = "./img/thumbnail_yt.png" width=600>)](https://www.youtube.com/watch?v=sDFPIl1nzCo)
+[![video](./img/thumbnail_yt.png)](https://www.youtube.com/watch?v=sDFPIl1nzCo)
 
 
 ## Sakila DB
@@ -15,7 +15,7 @@ Sakila is a database with data about films, how many of each film there are (inv
 
 ![ERD-Chart](./img/Sakila_staging.png)
 
-<img src = "./img/Sakila_staging.png" width=600>
+<img = src = 
 
 ## Sakila refined
 I discovered that there would be many joins in each query if I were to use the structure that was in schema staging, so I created a refined schema with these tables.
