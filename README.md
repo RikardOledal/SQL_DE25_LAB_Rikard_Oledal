@@ -1,9 +1,3 @@
-# SQL_DE25_LAB_Rikard_Oledal
-LAB for SQL-course on Data Engineer-program at STI 2025 
-
-https://www.youtube.com/watch?v=sDFPIl1nzCo
-
-
 # Lab3 - SQL
 
 The task for this Lab was to create a duckDB database from an SQLite database. The database is called Sakila and is a database with fictitious data about a company that rents movies in its two stores. For more information about Sakila, the database is available at [kaggle][1]
@@ -21,6 +15,8 @@ Sakila is a database with data about films, how many of each film there are (inv
 
 ![ERD-Chart](./img/Sakila_staging.png)
 
+<img = src = "./img/Sakila_staging.png" width=600>
+
 ## Sakila refined
 I discovered that there would be many joins in each query if I were to use the structure that was in schema staging, so I created a refined schema with these tables.
 
@@ -32,7 +28,7 @@ After this, DLT will copy the database to evidence. This allows you to add data 
 
 ![Pipeline](./img/Pipeline.png)
 
-## Operators
+## Evidence
 Comparison operators first compare Area and then Perimeter if the Areas are equal.
 
 ## Shape2dPlotter
