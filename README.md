@@ -7,7 +7,7 @@ I would answer questions from The Manager and insert these into a Manager report
 ![Lab_instructions](./img/Lab_SQL.pdf)
 
 ## Video
-[![video](./img/thumbnail_yt.png)](https://www.youtube.com/watch?v=sDFPIl1nzCo)
+[![video](<img src = "./img/thumbnail_yt.png" width=600>)](https://www.youtube.com/watch?v=sDFPIl1nzCo)
 
 
 ## Sakila DB
