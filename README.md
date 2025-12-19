@@ -18,12 +18,19 @@ I would answer questions from The Manager and insert these into a Manager report
 
 ## Sakila DB
 Sakila is a database with data about films, how many of each film there are (inventory), how much these have been rented and how much has been paid for this. There is also information about customers who rent and staff who work there.
-![ERD-Chart](Sakila_staging.png)
 
+![ERD-Chart](./img/Sakila_staging.png)
 
-## Classes
-The code consists of 5 shape classes and a class for Shape2dPlotter. All shape classes inherit from Dot.
-The two 3d classes have their respective 2d classes as compositions. This allows Shape2dPlotter to plot these as well, but in 2D.
+## Sakila refined
+I discovered that there would be many joins in each query if I were to use the structure that was in schema staging, so I created a refined schema with these tables.
+
+![ERD-Chart](./img/Sakila_refined.png)
+
+## Data Loading Tool (DLT)
+My DLT checks if there is already a DuckDB database in the data folder. If there is, DLT will not create the database. Then the DLT will run refined.sql were my refined schema and tables are added. All tables are omnipotent so they will not replace if the tables already exist.
+After this, DLT will copy the database to evidence. This allows you to add data to the database manually which will then end up in Evidence.
+
+![Pipeline](./img/Pipeline.png)
 
 ## Operators
 Comparison operators first compare Area and then Perimeter if the Areas are equal.
