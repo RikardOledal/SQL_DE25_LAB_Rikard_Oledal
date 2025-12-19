@@ -18,22 +18,28 @@ I would answer questions from The Manager and insert these into a Manager report
 1. Clone the repo
     ```bash
     git clone https://github.com/RikardOledal/SQL_DE25_LAB_Rikard_Oledal.git
+    ```
+
 2. Install dependencies:
     With pip:
     ```bash
     pip install -r requirements.txt
+    ```
 
     With uv:
     ```bash
     uv sync
+    ```
 
 3. Run DLT
     ```bash
     uv run DLT_Sakila.py
+    ```
 
     With uv:
     ```bash
     uv run DLT_Sakila.py
+    ```
 
 
 ## Sakila DB
