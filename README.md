@@ -15,7 +15,7 @@ Sakila is a database with data about films, how many of each film there are (inv
 
 ![ERD-Chart](./img/Sakila_staging.png)
 
-<img = src = "./img/Sakila_staging.png" width=600>
+<img src = "./img/Sakila_staging.png" width=600>
 
 ## Sakila refined
 I discovered that there would be many joins in each query if I were to use the structure that was in schema staging, so I created a refined schema with these tables.
